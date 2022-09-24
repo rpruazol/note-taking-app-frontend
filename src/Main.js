@@ -3,7 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import axios from 'axios';
 import Note from './Note'
-import { Draggable } from '@shopify/draggable';
+import { Sortable } from '@shopify/draggable';
 
 
 export default function Main() {
@@ -16,8 +16,8 @@ export default function Main() {
   }
 
   useEffect(() => {
-    const sort = new Draggable($draggable.current, {
-      draggable: '.card-body'
+    const sort = new Sortable($draggable.current, {
+      draggable: '.card'
     })
     const getNotes = async (obj) => {
       const URL = 'http://localhost:3001/';
@@ -27,12 +27,21 @@ export default function Main() {
     }
     getNotes();
     console.log(notes);
+    
+    sort.on('sort:start', ()=> {console.log('sort start')})
+    sort.on('sort:move', ()=> {console.log('sort move')})
+    sort.on('sort:stop', ()=> {console.log('sort stop')}) 
+
+
+    return () => {
+      sort.destroy();
+    }
   }, []);
 
   return (
     <>
       <Header />
-      <div ref={$draggable}>     
+      <div ref={$draggable} class="draggable-container">     
       {notes.length > 0 &&
         notes.map(obj => {
           return (
