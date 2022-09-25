@@ -8,7 +8,7 @@ import { Sortable } from '@shopify/draggable';
 export default function Main() {
 
   const getNotes = async (obj) => {
-    const URL = REACT_APP_BACKEND;
+    const URL = process.env.REACT_APP_BACKEND;
     const response = await axios.get(URL)
     console.log(response.data)
     setNotes(response.data);
