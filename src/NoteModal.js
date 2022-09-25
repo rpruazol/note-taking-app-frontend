@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import NoteForm from './NoteForm';
-import Form from 'react-bootstrap/Form'
-import axios from 'axios'
 
-export default function Note(props) {
+export default function NoteModal(props) {
 
   return (
     <>
@@ -14,8 +11,10 @@ export default function Note(props) {
           <Modal.Title>Add a new Note!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-      <NoteForm
-      />
+          <NoteForm
+          showModal={props.showModal}
+          getNotes={props.getNotes}
+          />
         </Modal.Body>
       </Modal>
     </>
