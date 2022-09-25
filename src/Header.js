@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import NoteModal from './NoteModal'
 
-function Header() {
+function Header(props) {
   const [modalOpen, showModal] = useState(false);
   
   return (
@@ -28,6 +28,7 @@ function Header() {
       <NoteModal 
         show={modalOpen}
         showModal={showModal}
+        getNotes={props.getNotes}
       />
     </>
   );

@@ -1,26 +1,62 @@
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import React from 'react';
-
+import Button from 'react-bootstrap/Button';
+import axios from 'axios'
 
 export default function NoteForm(props) {
+  const [noteTitle, setTitle] = useState('');
+  const [noteDescription, setDescription] = useState('');
+
+
+  const createNote = async (e) => {
+    e.preventDefault()
+    if(window.confirm('are you sure?')) {
+      console.log('noteTitle ', noteTitle);
+      console.log('noteDescription ', noteDescription);
+      const config = {
+        url: '/note',
+        method: 'post',
+        baseURL: process.env.REACT_APP_BACKEND,
+        data: {
+          title: noteTitle,
+          description: noteDescription
+        }
+      }
+      const response = await axios(config);
+      props.showModal(false);
+      props.getNotes();
+    } else {
+      return
+    }
+  }
+
 
 
   return (
-    <Form onSubmit={(e) => props.createNote(e)}>
-    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <Form.Label>Note Title</Form.Label>
-      <Form.Control
-        type="text"
-        autoFocus
-      />
-    </Form.Group>
-    <Form.Group
-      className="mb-3"
-      controlId="exampleForm.ControlTextarea1"
-    >
-      <Form.Label>Description</Form.Label>
-      <Form.Control as="textarea" rows={3} />
-    </Form.Group>
-  </Form>
+    <Form onSubmit={(e) => createNote(e)}>
+      <Form.Group className="mb-3" controlId="note-title">
+        <Form.Label>Note Title</Form.Label>
+        <Form.Control
+          type="text"
+          autoFocus
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="note-description">
+
+        <Form.Label>Description</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
+          onChange={(e) => setDescription(e.target.value)} />
+      </Form.Group>
+
+      <Button variant="secondary" onClick={() => props.showModal(false)}>
+        Close
+      </Button>
+      <Button variant="primary" type="submit">
+        Add Note
+      </Button>
+    </Form>
   );
 }
