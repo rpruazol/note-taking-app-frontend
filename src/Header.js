@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Note from './Note'
+import NoteModal from './NoteModal'
 
 function Header() {
   const [modalOpen, showModal] = useState(false);
@@ -25,7 +25,7 @@ function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Note 
+      <NoteModal 
         show={modalOpen}
         showModal={showModal}
       />
