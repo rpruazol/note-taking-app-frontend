@@ -29,6 +29,7 @@ function Header(props) {
       <BoardModal
         show={modalOpen}
         showModal={showModal}
+        getBoards={props.getBoards}
       />
     </>
   );

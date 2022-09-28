@@ -3,27 +3,31 @@ import Header from './Header';
 import axios from 'axios';
 import Note from './Note'
 import { Sortable } from '@shopify/draggable';
+import Board from './Board';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 export default function Main() {
 
-  const getNotes = async (obj) => {
+  const [boards, setBoards] = useState([])
+
+  const getBoards = async () => {
     const URL = process.env.REACT_APP_BACKEND;
     const response = await axios.get(URL)
-    console.log(response.data)
-    setNotes(response.data);
+    setBoards(response.data);
+
   }
   const $draggable = useRef()
   console.log($draggable);
-  const [notes, setNotes] = useState([])
 
   useEffect(() => {
     const sort = new Sortable($draggable.current, {
       draggable: '.card'
     })
 
-    getNotes();
-    console.log(notes);
+    getBoards();
 
     sort.on('sort:start', () => { console.log('sort start') })
     sort.on('sort:move', () => { console.log('sort move') })
@@ -36,23 +40,28 @@ export default function Main() {
   }, []);
 
 
+  console.log('boards: ', boards);
   return (
     <>
       <Header
-        getBoards={getNotes}
+        getBoards={getBoards}
       />
-      <div ref={$draggable} class="draggable-container">
-        {notes.length > 0 &&
-          notes.map(obj => {
-            return (
-              <Note
-                data={obj}
-                getNotes={getNotes}
-              />
-            )
-          })
-        }
-      </div>
+      <Container className="mt-4">
+        <Row>
+            {boards.length > 0 &&
+              boards.map(obj => {
+                return (
+                  <Col>
+                    <Board
+                      data={obj}
+                      getBoards={getBoards}
+                    />
+                  </Col>
+                )
+              })
+            }
+        </Row>
+      </Container>
     </>
   )
 }

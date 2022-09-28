@@ -12,6 +12,7 @@ export default function NoteModal(props) {
         </Modal.Header>
         <Modal.Body>
           <NoteForm
+          boardObj={props.boardObj}
           showModal={props.showModal}
           getNotes={props.getNotes}
           />

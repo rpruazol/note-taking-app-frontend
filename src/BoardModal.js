@@ -15,7 +15,7 @@ export default function BoardModal(props) {
         <Modal.Body>
           <BoardForm
             showModal={props.showModal}
-            // getBoards={getBoards}
+            getBoards={props.getBoards}
           />
         </Modal.Body>
       </Modal>

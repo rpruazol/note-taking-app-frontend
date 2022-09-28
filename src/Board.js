@@ -1,16 +1,58 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import NoteModal from './NoteModal';
+import axios from 'axios';
+import Note from './Note';
 
 export default function Board(props) {
+  console.log('props.data  ', props.data)
+  const [modalOpen, showModal] = useState(false);
+  const [notes, setNotes] = useState([])
+
+  const getNotes = async (obj) => {
+    const URL = `${process.env.REACT_APP_BACKEND}/notes?id=${obj.id}`;
+    console.log('URL ', URL)
+    const response = await axios.get(URL)
+    console.log(response.data)
+    setNotes(response.data);
+  }
+
+  useEffect(() => {
+    getNotes(props.data)
+  }, []);
+
+  console.log('notes ', notes)
   return (
-    <Container>
+    <Card className="p-2">
       <Row>
-        <Col>+ Add a Card</Col>
+        <h3>{props.data.name}</h3>
+        <Col>
+          <p>Add a Card</p>
+          <Button onClick={showModal} variant="outline-dark">+</Button>
+        </Col>
       </Row>
-    </Container>
+      <Row>
+        {notes.length > 0 &&
+          notes.map(obj => {
+            return (
+            <Note
+              getNotes={getNotes}
+              data={obj}
+            />
+            )
+          })
+        }
+      </Row>
+      <NoteModal
+        boardObj={props.data}
+        showModal={showModal}
+        show={modalOpen}
+        getNotes={getNotes}
+      />
+    </Card>
   );
 }

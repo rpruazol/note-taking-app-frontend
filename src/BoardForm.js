@@ -20,7 +20,7 @@ export default function BoardForm(props) {
       }
       const response = await axios(config);
       props.showModal(false);
-      // props.getBoards();
+      props.getBoards();
     } else {
       return
     }
