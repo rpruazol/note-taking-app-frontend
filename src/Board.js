@@ -27,13 +27,13 @@ export default function Board(props) {
 
   console.log('notes ', notes)
   return (
-    <Card className="p-2">
-      <Row>
+    <Card className="p-3 ms-4 mt-4" style={{width:'272px'}}>
+      <Row className="row flex-row flex-nowrap">
+      <div>
         <h3>{props.data.name}</h3>
-        <Col>
-          <p>Add a Card</p>
-          <Button onClick={showModal} variant="outline-dark">+</Button>
-        </Col>
+          <p style={{display:'inline'}}>Add a Card</p>
+          <Button onClick={showModal} variant="outline-dark" className="">+</Button>
+      </div>
       </Row>
       <Row>
         {notes.length > 0 &&
@@ -53,6 +53,6 @@ export default function Board(props) {
         show={modalOpen}
         getNotes={getNotes}
       />
-    </Card>
+    </Card >
   );
 }

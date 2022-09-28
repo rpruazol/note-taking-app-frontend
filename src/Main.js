@@ -46,22 +46,18 @@ export default function Main() {
       <Header
         getBoards={getBoards}
       />
-      <Container className="mt-4">
-        <Row>
+        <Row style={{'overflow-x':'auto', 'white-space': 'nowrap'}}>
             {boards.length > 0 &&
               boards.map(obj => {
                 return (
-                  <Col>
                     <Board
                       data={obj}
                       getBoards={getBoards}
                     />
-                  </Col>
                 )
               })
             }
         </Row>
-      </Container>
     </>
   )
 }
