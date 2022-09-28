@@ -21,9 +21,10 @@ export default function Note(props) {
       const response = await axios(config);
       console.log(response)
       console.log('props: ', props)
-      props.getNotes()
+      props.getNotes(props.data)
     }
   }
+  console.log('Note props: ', props)
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>

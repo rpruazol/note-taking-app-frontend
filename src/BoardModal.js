@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import NoteForm from './NoteForm';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import BoardForm from './BoardForm'
 
-export default function NoteModal(props) {
+export default function BoardModal(props) {
 
   return (
     <>
       <Modal show={props.show} onHide={() => props.showModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Add a new Note!</Modal.Title>
+          <Modal.Title>Add a new Board!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <NoteForm
-          boardObj={props.boardObj}
-          showModal={props.showModal}
-          getNotes={props.getNotes}
+          <BoardForm
+            showModal={props.showModal}
+            getBoards={props.getBoards}
           />
         </Modal.Body>
       </Modal>

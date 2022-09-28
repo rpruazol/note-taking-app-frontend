@@ -7,7 +7,7 @@ export default function NoteForm(props) {
   const [noteTitle, setTitle] = useState('');
   const [noteDescription, setDescription] = useState('');
 
-
+  console.log('NoteForm props: ', props.boardObj)
   const createNote = async (e) => {
     e.preventDefault()
     if(window.confirm('are you sure?')) {
@@ -19,12 +19,14 @@ export default function NoteForm(props) {
         baseURL: process.env.REACT_APP_BACKEND,
         data: {
           title: noteTitle,
-          description: noteDescription
+          description: noteDescription,
+          board_id: props.boardObj.id,
+          board: props.boardObj.name
         }
       }
       const response = await axios(config);
       props.showModal(false);
-      props.getNotes();
+      props.getNotes(props.boardObj);
     } else {
       return
     }
