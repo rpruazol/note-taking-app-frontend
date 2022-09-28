@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import NoteModal from './NoteModal'
+import BoardModal from './BoardModal'
 
 function Header(props) {
   const [modalOpen, showModal] = useState(false);
@@ -20,15 +21,14 @@ function Header(props) {
               <Nav.Link href="#link">About</Nav.Link>
             </Nav>
             <Nav md={{ span: 4, offset: 4 }}>
-              <Nav.Link onClick={() => showModal(true)}>New Note</Nav.Link>
+              <Nav.Link onClick={() => showModal(true)}>New Board</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <NoteModal 
+      <BoardModal
         show={modalOpen}
         showModal={showModal}
-        getNotes={props.getNotes}
       />
     </>
   );

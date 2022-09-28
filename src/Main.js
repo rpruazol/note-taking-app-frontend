@@ -25,9 +25,9 @@ export default function Main() {
     getNotes();
     console.log(notes);
 
-    sort.on('sort:start', ()=> {console.log('sort start')})
-    sort.on('sort:move', ()=> {console.log('sort move')})
-    sort.on('sort:stop', ()=> {console.log('sort stop')}) 
+    sort.on('sort:start', () => { console.log('sort start') })
+    sort.on('sort:move', () => { console.log('sort move') })
+    sort.on('sort:stop', () => { console.log('sort stop') })
 
 
     return () => {
@@ -38,20 +38,20 @@ export default function Main() {
 
   return (
     <>
-      <Header 
-      getNotes={getNotes}
+      <Header
+        getBoards={getNotes}
       />
-      <div ref={$draggable} class="draggable-container">     
-      {notes.length > 0 &&
-        notes.map(obj => {
-          return (
-                <Note
-                  data={obj}
-                  getNotes={getNotes}
-                />
-          )
-        })
-      }
+      <div ref={$draggable} class="draggable-container">
+        {notes.length > 0 &&
+          notes.map(obj => {
+            return (
+              <Note
+                data={obj}
+                getNotes={getNotes}
+              />
+            )
+          })
+        }
       </div>
     </>
   )
