@@ -21,12 +21,12 @@ export default function Note(props) {
       const response = await axios(config);
       console.log(response)
       console.log('props: ', props)
-      props.getNotes(props.data)
+      props.getNotes(props.data.board_id)
     }
   }
   console.log('Note props: ', props)
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card className="mt-3 mb-3">
       <Card.Body>
         <Card.Title>{props.data.title}</Card.Title>
         <Card.Text>
