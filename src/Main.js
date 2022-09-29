@@ -46,7 +46,7 @@ export default function Main() {
       <Header
         getBoards={getBoards}
       />
-        <Row style={{'overflow-x':'auto', 'white-space': 'nowrap'}}>
+        <Row>
             {boards.length > 0 &&
               boards.map(obj => {
                 return (

@@ -46,11 +46,11 @@ export default function Board(props) {
 
   return (
     <Card className="p-3 ms-4 mt-4" style={{ width: '272px' }}>
-      <Row className="row flex-row flex-nowrap">
+      <Row>
         <div>
-          <div class="board-header">
+          <div class="board-header" style={{'word-break':'break-all'}}>
             <h3>{props.data.name}</h3>
-            <Button onClick={() => {deleteBoard(props.data)}} variant="dark" className="">x</Button>
+            <Button style={{height:'50px'}}onClick={() => {deleteBoard(props.data)}} variant="dark" className="">x</Button>
           </div>
         </div>
 
