@@ -26,7 +26,7 @@ export default function NoteForm(props) {
       }
       const response = await axios(config);
       props.showModal(false);
-      props.getNotes(props.boardObj);
+      props.getNotes(props.boardObj.id);
     } else {
       return
     }

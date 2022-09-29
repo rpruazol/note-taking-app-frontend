@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -13,40 +12,62 @@ export default function Board(props) {
   const [modalOpen, showModal] = useState(false);
   const [notes, setNotes] = useState([])
 
-  const getNotes = async (obj) => {
-    const URL = `${process.env.REACT_APP_BACKEND}/notes?id=${obj.id}`;
+  const getNotes = async (id) => {
+    const URL = `${process.env.REACT_APP_BACKEND}/notes?id=${id}`;
     console.log('URL ', URL)
     const response = await axios.get(URL)
     console.log(response.data)
     setNotes(response.data);
   }
 
+  const deleteBoard = async (obj) => {
+    if(window.confirm('Delete this board?  This will also delete all the notes associated with it.')) {
+      console.log('deleted info: ', obj);
+      const URL = process.env.REACT_APP_BACKEND
+      const config = {
+        url: '/board',
+        method: 'delete',
+        baseURL: process.env.REACT_APP_BACKEND,
+        data: {
+          board: obj
+        }
+      }
+      const response = await axios(config);
+      console.log(response);
+      props.getBoards();
+      getNotes(props.data.id);
+    }
+
+  }
+
   useEffect(() => {
-    getNotes(props.data)
+    getNotes(props.data.id)
   }, []);
 
-  console.log('notes ', notes)
   return (
-    <Card className="p-3 ms-4 mt-4" style={{width:'272px'}}>
+    <Card className="p-3 ms-4 mt-4" style={{ width: '272px' }}>
       <Row className="row flex-row flex-nowrap">
-      <div>
-        <h3>{props.data.name}</h3>
-          <p style={{display:'inline'}}>Add a Card</p>
-          <Button onClick={showModal} variant="outline-dark" className="">+</Button>
-      </div>
+        <div>
+          <div class="board-header">
+            <h3>{props.data.name}</h3>
+            <Button onClick={() => {deleteBoard(props.data)}} variant="dark" className="">x</Button>
+          </div>
+        </div>
+
       </Row>
-      <Row>
+      <Col>
         {notes.length > 0 &&
           notes.map(obj => {
             return (
-            <Note
-              getNotes={getNotes}
-              data={obj}
-            />
+              <Note
+                getNotes={getNotes}
+                data={obj}
+              />
             )
           })
         }
-      </Row>
+      </Col>
+      <Button onClick={showModal} variant="outline-dark" className="">+ Add a Card</Button>
       <NoteModal
         boardObj={props.data}
         showModal={showModal}

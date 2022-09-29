@@ -39,6 +39,15 @@
   }
 }
 
-div > .card {
-  display:inline-block;
+.board-header >  h3{
+  display: inline-block
+}
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  /* background-color: ghostwhite; */
+}
+
+.p-3.ms-4.mt-4.card {
+  background-color: ghostwhite;
 }
