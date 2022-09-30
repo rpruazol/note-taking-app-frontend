@@ -51,7 +51,6 @@ export default function Board(props) {
 
   return (
     <Container className="p-3 ms-4 mt-4" style={{ width: '272px' }}>
-
       <div>
         <div class="board-header" style={{ 'word-break': 'break-all' }}>
           <h2>{props.data.name}</h2>

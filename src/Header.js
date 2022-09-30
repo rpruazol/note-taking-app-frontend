@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,12 +7,12 @@ import NoteModal from './NoteModal'
 
 function Header(props) {
   // const [modalOpen, showModal] = useState(false);
-  
+
   return (
-    <> 
-       <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+    <>
+      <Navbar bg="dark" variant="dark" style={{"border-bottom":"1px solid grey"}}>
+        <Container className="ms-3">
+          <Navbar.Brand href="#home">Trello (sorta)</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
