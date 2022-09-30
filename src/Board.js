@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import NoteModal from './NoteModal';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
+
 import Note from './Note';
 
 export default function Board(props) {
@@ -21,7 +23,7 @@ export default function Board(props) {
   }
 
   const deleteBoard = async (obj) => {
-    if(window.confirm('Delete this board?  This will also delete all the notes associated with it.')) {
+    if (window.confirm('Delete this board?  This will also delete all the notes associated with it.')) {
       console.log('deleted info: ', obj);
       const URL = process.env.REACT_APP_BACKEND
       const config = {
@@ -41,22 +43,21 @@ export default function Board(props) {
   }
 
   useEffect(() => {
-    if(props.data.id)
-    getNotes(props.data.id)
+    if (props.data.id)
+      getNotes(props.data.id)
   }, [props.data.id]);
 
   return (
-    <Card className="p-3 ms-4 mt-4" style={{ width: '272px' }}>
-      <Row>
-        <div>
-          <div class="board-header" style={{'word-break':'break-all'}}>
-            <h3>{props.data.name}</h3>
-            <Button style={{height:'50px'}}onClick={() => {deleteBoard(props.data)}} variant="dark" className="">x</Button>
-          </div>
-        </div>
+    <Container className="p-3 ms-4 mt-4" style={{ width: '272px' }}>
 
-      </Row>
-      <Col>
+          <div>
+            <div class="board-header" style={{ 'word-break': 'break-all' }}>
+              <h3>{props.data.name}</h3>
+              <Button style={{ height: '50px' }} onClick={() => { deleteBoard(props.data) }} variant="dark" className="">x</Button>
+            </div>
+          </div>
+
+
         {notes.length > 0 &&
           notes.map(obj => {
             return (
@@ -67,7 +68,7 @@ export default function Board(props) {
             )
           })
         }
-      </Col>
+
       <Button onClick={showModal} variant="outline-dark" className="">+ Add a Card</Button>
       <NoteModal
         boardObj={props.data}
@@ -75,6 +76,6 @@ export default function Board(props) {
         show={modalOpen}
         getNotes={getNotes}
       />
-    </Card >
+    </Container >
   );
 }
