@@ -68,6 +68,7 @@ div>.container {
   flex-direction: column;
   background-color: #ebecf0;
   border-radius: .5em;
+  overflow:visible;
 }
 
 .container>div {
@@ -86,4 +87,10 @@ button {
 button:hover {
   background-color: #dadbe2;
   color: #172b4d;
+}
+
+.row {
+  height: 95%;
+  width: 100%;
+  position:fixed;
 }
