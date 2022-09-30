@@ -41,8 +41,9 @@ export default function Board(props) {
   }
 
   useEffect(() => {
+    if(props.data.id)
     getNotes(props.data.id)
-  }, []);
+  }, [props.data.id]);
 
   return (
     <Card className="p-3 ms-4 mt-4" style={{ width: '272px' }}>
