@@ -58,5 +58,6 @@ div > .container {
   display: inline-flex;
   align-content: stretch;
   flex-direction: column;
+  border: 1px solid black;
 }
 
