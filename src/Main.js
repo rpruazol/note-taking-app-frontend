@@ -7,11 +7,16 @@ import Board from './Board';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import BoardModal from './BoardModal'
+import Button from 'react-bootstrap/Button';
+
 
 
 export default function Main() {
 
   const [boards, setBoards] = useState([])
+  const [modalOpen, showModal] = useState(false);
+
 
   const getBoards = async () => {
     const URL = process.env.REACT_APP_BACKEND;
@@ -29,9 +34,9 @@ export default function Main() {
 
     getBoards();
 
-    sort.on('sort:start', () => { console.log('sort start') })
+    sort.on('sort:start', () => { console.log(`sort start: ${sort}`) })
     sort.on('sort:move', () => { console.log('sort move') })
-    sort.on('sort:stop', () => { console.log('sort stop') })
+    sort.on('sort:stop', () => { console.log('sort stop: ') })
 
 
     return () => {
@@ -60,7 +65,15 @@ export default function Main() {
               )
             })
           }
+          <Button onClick={showModal} variant="secondary" size="lg" className="ms-3" style={{width: "272px"}}>
+            Add a Board!
+          </Button>
         </div>
+        <BoardModal
+        show={modalOpen}
+        showModal={showModal}
+        getBoards={getBoards}
+      />
       </Row>
     </>
   )

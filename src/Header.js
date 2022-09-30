@@ -4,14 +4,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import NoteModal from './NoteModal'
-import BoardModal from './BoardModal'
 
 function Header(props) {
-  const [modalOpen, showModal] = useState(false);
+  // const [modalOpen, showModal] = useState(false);
   
   return (
     <> 
-       <Navbar bg="light" expand="lg">
+       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -20,17 +19,17 @@ function Header(props) {
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#link">About</Nav.Link>
             </Nav>
-            <Nav md={{ span: 4, offset: 4 }}>
+            {/* <Nav md={{ span: 4, offset: 4 }}>
               <Nav.Link onClick={() => showModal(true)}>New Board</Nav.Link>
-            </Nav>
+            </Nav> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <BoardModal
+      {/* <BoardModal
         show={modalOpen}
         showModal={showModal}
         getBoards={props.getBoards}
-      />
+      /> */}
     </>
   );
 }

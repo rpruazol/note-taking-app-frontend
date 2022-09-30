@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import NoteModal from './NoteModal';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
+
 
 import Note from './Note';
 
@@ -53,7 +55,14 @@ export default function Board(props) {
       <div>
         <div class="board-header" style={{ 'word-break': 'break-all' }}>
           <h3>{props.data.name}</h3>
-          <Button style={{ height: '50px' }} onClick={() => { deleteBoard(props.data) }} variant="dark" className="">x</Button>
+          {/* <Button style={{ height: '50px' }} onClick={() => { deleteBoard(props.data) }} variant="dark" className="">x</Button> */}
+          <DropdownButton
+            as={ButtonGroup}
+            key="info"
+            id={`dropdown-variants-none`}
+          >
+            <Dropdown.Item eventKey="1" onClick={() => {deleteBoard(props.data)}} >Delete Board</Dropdown.Item>
+          </DropdownButton>
         </div>
       </div>
 
