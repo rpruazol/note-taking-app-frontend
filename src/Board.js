@@ -50,26 +50,28 @@ export default function Board(props) {
   return (
     <Container className="p-3 ms-4 mt-4" style={{ width: '272px' }}>
 
-          <div>
-            <div class="board-header" style={{ 'word-break': 'break-all' }}>
-              <h3>{props.data.name}</h3>
-              <Button style={{ height: '50px' }} onClick={() => { deleteBoard(props.data) }} variant="dark" className="">x</Button>
-            </div>
-          </div>
+      <div>
+        <div class="board-header" style={{ 'word-break': 'break-all' }}>
+          <h3>{props.data.name}</h3>
+          <Button style={{ height: '50px' }} onClick={() => { deleteBoard(props.data) }} variant="dark" className="">x</Button>
+        </div>
+      </div>
 
 
-        {notes.length > 0 &&
-          notes.map(obj => {
-            return (
-              <Note
-                getNotes={getNotes}
-                data={obj}
-              />
-            )
-          })
-        }
+      {notes.length > 0 &&
+        notes.map(obj => {
+          return (
+            <Note
+              getNotes={getNotes}
+              data={obj}
+            />
+          )
+        })
+      }
 
-      <Button onClick={showModal} variant="outline-dark" className="">+ Add a Card</Button>
+      <button onClick={showModal} >
+        <span>+ Add a Card</span>
+      </button>
       <NoteModal
         boardObj={props.data}
         showModal={showModal}

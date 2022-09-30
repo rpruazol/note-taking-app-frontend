@@ -53,11 +53,27 @@
 }
 div > .card {
   display:inline-flex;
+  background-color: #ffffff;
+  box-shadow: var(--ds-shadow-raised,0 1px 0 #091e4240);
 }
 div > .container {
   display: inline-flex;
   align-content: stretch;
   flex-direction: column;
-  border: 1px solid black;
+  background-color: #ebecf0;
+  border-radius: .5em;
 }
 
+button {
+  text-align:left;
+  border: none;
+  background-color: #ebecf0;
+  padding: .3em;
+  color:#5f6d84;
+
+}
+
+button:hover {
+  background-color: #dadbe2;
+  color: #172b4d;
+}
