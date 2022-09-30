@@ -46,7 +46,7 @@ export default function Main() {
       <Header
         getBoards={getBoards}
       />
-      <Row>
+      <Row style={{'overflow-x':'auto', 'white-space': 'nowrap'}}>
         <div ref={$draggable}>
           {boards.length > 0 &&
             boards.map(obj => {
