@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
-.row {
+/* .row {
   flex-wrap: nowrap !important;
+} */
+
+.board {
+  display:inline-block;
 }

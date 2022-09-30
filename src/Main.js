@@ -24,7 +24,7 @@ export default function Main() {
 
   useEffect(() => {
     const sort = new Sortable($draggable.current, {
-      draggable: '.card'
+      draggable: '.container'
     })
 
     getBoards();
@@ -46,18 +46,22 @@ export default function Main() {
       <Header
         getBoards={getBoards}
       />
-        <Row>
-            {boards.length > 0 &&
-              boards.map(obj => {
-                return (
-                    <Board
-                      data={obj}
-                      getBoards={getBoards}
-                    />
-                )
-              })
-            }
-        </Row>
+      <Row style={{'overflow-x':'auto', 'white-space': 'nowrap'}}>
+        <div ref={$draggable}>
+          {boards.length > 0 &&
+            boards.map(obj => {
+              return (
+
+                  <Board
+                    data={obj}
+                    getBoards={getBoards}
+                  />
+
+              )
+            })
+          }
+        </div>
+      </Row>
     </>
   )
 }
