@@ -54,8 +54,7 @@ export default function Board(props) {
 
       <div>
         <div class="board-header" style={{ 'word-break': 'break-all' }}>
-          <h3>{props.data.name}</h3>
-          {/* <Button style={{ height: '50px' }} onClick={() => { deleteBoard(props.data) }} variant="dark" className="">x</Button> */}
+          <h2>{props.data.name}</h2>
           <DropdownButton
             as={ButtonGroup}
             key="info"
