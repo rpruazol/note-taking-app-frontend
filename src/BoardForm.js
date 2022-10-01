@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios'
@@ -18,7 +18,7 @@ export default function BoardForm(props) {
           title: boardTitle,
         }
       }
-      const response = await axios(config);
+      await axios(config);
       props.showModal(false);
       props.getBoards();
     } else {

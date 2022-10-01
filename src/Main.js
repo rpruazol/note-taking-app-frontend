@@ -22,7 +22,6 @@ export default function Main() {
 
   }
   const $draggable = useRef()
-  console.log($draggable);
 
   useEffect(() => {
     const sort = new Sortable($draggable.current, {
@@ -31,7 +30,7 @@ export default function Main() {
 
     getBoards();
 
-    sort.on('sortable:start', () => console.log('sortable:start: ', sort ));
+    sort.on('sortable:start', () => console.log('sortable:start: ', sort));
     sort.on('sortable:sort', () => console.log('sortable:sort'));
     sort.on('sortable:sorted', () => console.log('sortable:sorted'));
     sort.on('sortable:stop', () => console.log('sortable:stop'));
@@ -42,36 +41,37 @@ export default function Main() {
     }
   }, []);
 
-  
+
 
   return (
     <>
       <Header
         getBoards={getBoards}
       />
-      <Row style={{'overflow-x':'auto', 'white-space': 'nowrap'}}>
+      <Row style={{ 'overflowX': 'auto', 'whiteSpace': 'nowrap' }}>
         <div ref={$draggable}>
           {boards.length > 0 &&
             boards.map(obj => {
               return (
 
-                  <Board
-                    data={obj}
-                    getBoards={getBoards}
-                  />
+                <Board
+                  key={obj.id}
+                  data={obj}
+                  getBoards={getBoards}
+                />
 
               )
             })
           }
-          <Button onClick={showModal} variant="secondary" size="lg" className="ms-3" style={{width: "272px"}}>
+          <Button onClick={showModal} variant="secondary" size="lg" className="ms-3" style={{ width: "272px" }}>
             Add a Board!
           </Button>
         </div>
         <BoardModal
-        show={modalOpen}
-        showModal={showModal}
-        getBoards={getBoards}
-      />
+          show={modalOpen}
+          showModal={showModal}
+          getBoards={getBoards}
+        />
       </Row>
     </>
   )
