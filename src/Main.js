@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Header from './Header';
 import axios from 'axios';
-import { Sortable } from '@shopify/draggable';
+import { Sortable, Plugins } from '@shopify/draggable';
 import Board from './Board';
 import Row from 'react-bootstrap/Row';
 import BoardModal from './BoardModal'
@@ -36,18 +36,25 @@ export default function Main() {
     setBoards(response.data);
   }
   const $draggable = useRef()
-
+console.log($draggable)
   useEffect(() => {
     const sort = new Sortable($draggable.current, {
-      draggable: '.container'
+      draggable: '.container',
+      mirror: {
+        constrainDimensions: true,
+        cursorOffsetX: 60,
+        cursorOffsetY: 60,
+      }
+
     })
 
     getBoards()
 
-    sort.on('sortable:start', () => console.log('sortable:start: '));
+    
+    sort.on('sortable:start', (e) => console.log('sortable:start: ', e.dragEvent.data.source.style.rotate = '3.5deg')); 
     sort.on('sortable:sort', () => console.log('sortable:sort'));
     sort.on('sortable:sorted', () => console.log('sortable:sorted'));
-    sort.on('sortable:stop', (e) => console.log('sortable:stop: ', saveOrder(Array.from(sort.getDraggableElementsForContainer(e.newContainer)).map((object, idx) => ({id: object.id, board_order: idx+1 })))));
+    sort.on('sortable:stop', (e) => console.log('sortable:stop: ', saveOrder(Array.from(sort.getDraggableElementsForContainer(e.newContainer)).map((object, idx) => ({ id: object.id, board_order: idx + 1 })))));
 
 
     return () => {
