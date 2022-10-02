@@ -33,7 +33,7 @@ export default function Main() {
     sort.on('sortable:start', () => console.log('sortable:start: ', sort));
     sort.on('sortable:sort', () => console.log('sortable:sort'));
     sort.on('sortable:sorted', () => console.log('sortable:sorted'));
-    sort.on('sortable:stop', () => console.log('sortable:stop'));
+    sort.on('sortable:stop', (e) => console.log('sortable:stop: ', Array.from(sort.getDraggableElementsForContainer(e.newContainer)).map(object => object.textContent), 'boards:  ', boards ));
 
 
     return () => {
