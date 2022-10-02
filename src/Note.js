@@ -1,12 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 
 
 export default function Note(props) {
-  const [noteId, setNoteId] = useState('');
   const deleteNote = async (id) => {
     console.log('id', id);
     if(window.confirm('are you sure')){
@@ -24,11 +23,10 @@ export default function Note(props) {
       props.getNotes(props.data.board_id)
     }
   }
-  console.log('Note props: ', props)
   return (
-    <Card className="mt-3 mb-3">
-      <Card.Body>
-        <Card.Title>{props.data.title}</Card.Title>
+    <Card className="mt-3 mb-3" key={props.id}>
+      <Card.Body key={props.id}>
+        <Card.Title key={props.id}>{props.data.title}</Card.Title>
         <Card.Text>
           {props.data.description}
         </Card.Text>
