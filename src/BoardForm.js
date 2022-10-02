@@ -19,7 +19,7 @@ export default function BoardForm(props) {
         baseURL: process.env.REACT_APP_BACKEND,
         data: {
           title: boardTitle,
-          board_order: boardCount.data.length + 1 
+          board_order: (boardCount.data.length)
         }
       }
       await axios(config);
