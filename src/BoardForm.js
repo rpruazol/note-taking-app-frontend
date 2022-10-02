@@ -9,6 +9,9 @@ export default function BoardForm(props) {
   const createBoard = async (e) => {
     e.preventDefault()
     if (window.confirm('are you sure?')) {
+      // get count of how many boards exist
+      const boardCount = await axios.get(process.env.REACT_APP_BACKEND);
+      console.log(boardCount.data.length)
       console.log('noteTitle ', boardTitle);
       const config = {
         url: '/board',
@@ -16,6 +19,7 @@ export default function BoardForm(props) {
         baseURL: process.env.REACT_APP_BACKEND,
         data: {
           title: boardTitle,
+          board_order: boardCount.data.length + 1 
         }
       }
       await axios(config);

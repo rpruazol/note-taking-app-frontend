@@ -14,12 +14,26 @@ export default function Main() {
   const [boards, setBoards] = useState([])
   const [modalOpen, showModal] = useState(false);
 
+  const saveOrder = async (arr) => {
+    console.log('result: ', arr)
+    console.log('boards: ', boards)
+    const config = {
+      url: '/board',
+      method: 'put',
+      baseURL: process.env.REACT_APP_BACKEND,
+      data: {
+        new_order: arr
+      }
+    }
+    const response = await axios(config);
+    console.log(response);
+
+  }
 
   const getBoards = async () => {
     const URL = process.env.REACT_APP_BACKEND;
     const response = await axios.get(URL)
     setBoards(response.data);
-
   }
   const $draggable = useRef()
 
@@ -28,21 +42,19 @@ export default function Main() {
       draggable: '.container'
     })
 
-    getBoards();
+    getBoards()
 
-    sort.on('sortable:start', () => console.log('sortable:start: ', sort));
+    sort.on('sortable:start', () => console.log('sortable:start: '));
     sort.on('sortable:sort', () => console.log('sortable:sort'));
     sort.on('sortable:sorted', () => console.log('sortable:sorted'));
-    sort.on('sortable:stop', (e) => console.log('sortable:stop: ', Array.from(sort.getDraggableElementsForContainer(e.newContainer)).map(object => object.textContent), 'boards:  ', boards ));
+    sort.on('sortable:stop', (e) => console.log('sortable:stop: ', saveOrder(Array.from(sort.getDraggableElementsForContainer(e.newContainer)).map((object, idx) => ({id: object.id, board_order: idx+1 })))));
 
 
     return () => {
       sort.destroy();
     }
   }, []);
-
-
-
+  console.log(boards.map(value => value.id));
   return (
     <>
       <Header

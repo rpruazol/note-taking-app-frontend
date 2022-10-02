@@ -43,7 +43,7 @@ export default function Board(props) {
   }, [props.data.id]);
 
   return (
-    <Container className="p-3 ms-4 mt-4" style={{ width: '272px' }} key={props.data.id}  >
+    <Container className="p-3 ms-4 mt-4" style={{ width: '272px' }} key={props.data.id} id={props.data.id} >
       <div key={props.data.id}>
         <div className="board-header" key={props.data.id}>
           <h2>{props.data.name}</h2>
