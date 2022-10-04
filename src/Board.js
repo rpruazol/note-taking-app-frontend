@@ -23,7 +23,7 @@ export default function Board(props) {
   const deleteBoard = async (obj) => {
     if (window.confirm('Delete this board?  This will also delete all the notes associated with it.')) {
       const config = {
-        url: '/board',
+        url: '/boards',
         method: 'delete',
         baseURL: process.env.REACT_APP_BACKEND,
         data: {

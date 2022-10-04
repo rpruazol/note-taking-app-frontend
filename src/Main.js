@@ -18,7 +18,7 @@ export default function Main() {
     console.log('result: ', arr)
     console.log('boards: ', boards)
     const config = {
-      url: '/board',
+      url: '/boards',
       method: 'put',
       baseURL: process.env.REACT_APP_BACKEND,
       data: {
@@ -31,7 +31,7 @@ export default function Main() {
   }
 
   const getBoards = async () => {
-    const URL = process.env.REACT_APP_BACKEND;
+    const URL = `${process.env.REACT_APP_BACKEND}/boards`;
     const response = await axios.get(URL)
     setBoards(response.data);
   }

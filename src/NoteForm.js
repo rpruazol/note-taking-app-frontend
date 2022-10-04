@@ -14,7 +14,7 @@ export default function NoteForm(props) {
       console.log('noteTitle ', noteTitle);
       console.log('noteDescription ', noteDescription);
       const config = {
-        url: '/note',
+        url: '/notes',
         method: 'post',
         baseURL: process.env.REACT_APP_BACKEND,
         data: {
