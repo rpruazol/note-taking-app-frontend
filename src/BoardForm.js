@@ -10,11 +10,11 @@ export default function BoardForm(props) {
     e.preventDefault()
     if (window.confirm('are you sure?')) {
       // get count of how many boards exist
-      const boardCount = await axios.get(process.env.REACT_APP_BACKEND);
+      const boardCount = await axios.get(`${process.env.REACT_APP_BACKEND}/boards`);
       console.log(boardCount.data.length)
       console.log('noteTitle ', boardTitle);
       const config = {
-        url: '/board',
+        url: '/boards',
         method: 'post',
         baseURL: process.env.REACT_APP_BACKEND,
         data: {

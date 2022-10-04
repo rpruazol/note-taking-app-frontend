@@ -10,7 +10,7 @@ export default function Note(props) {
     console.log('id', id);
     if(window.confirm('are you sure')){
       const config = {
-        url: '/note',
+        url: '/notes',
         method: 'delete',
         baseURL: process.env.REACT_APP_BACKEND,
         data: {
