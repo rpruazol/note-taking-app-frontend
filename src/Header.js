@@ -4,38 +4,35 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
+import User from './User';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function Header(props) {
-console.log(props)
+  console.log(props)
   return (
     <>
       <Navbar bg="dark" variant="dark" style={{ "borderBottom": "1px solid grey" }}>
         <Container className="ms-3">
-          <Navbar.Brand href="#home">Trello (sorta)</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">About</Nav.Link>
-              <Nav.Link>
-                {props.isAuthenticated ?
-                  <LogoutButton>Logout</LogoutButton>
-                :
-                <LoginButton>Login</LoginButton>
+    <Router>
+      <Routes>
+              <Route
+              exact
+              path="/"
+                element={props.isAuthenticated ?
+                  <>
+                    <LogoutButton>Logout</LogoutButton>
+                    <User>User</User>
+                  </>
+                  :
+                  <>
+                  <LoginButton>Login</LoginButton>
+                  </>
                 }
-              </Nav.Link>
-            </Nav>
-            {/* <Nav md={{ span: 4, offset: 4 }}>
-              <Nav.Link onClick={() => showModal(true)}>New Board</Nav.Link>
-            </Nav> */}
-          </Navbar.Collapse>
+                />
+      </Routes>
+      </Router>
         </Container>
       </Navbar>
-      {/* <BoardModal
-        show={modalOpen}
-        showModal={showModal}
-        getBoards={props.getBoards}
-      /> */}
     </>
   );
 }

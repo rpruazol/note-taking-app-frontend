@@ -87,10 +87,6 @@ function Main(props) {
         isAuthenticated={isAuthenticated}
       />
       <Row style={{ 'overflowX': 'auto', 'whiteSpace': 'nowrap' }}>
-        {isAuthenticated && (
-          <User />
-        )
-        }
         <div ref={$draggable}>
           {boards.length > 0 &&
             boards.map(obj => {
