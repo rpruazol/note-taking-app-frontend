@@ -2,14 +2,20 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import React from 'react';
 import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 
 export default function Note(props) {
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+
   const deleteNote = async (id) => {
+
     console.log('id', id);
     if(window.confirm('are you sure')){
+
       const config = {
+        headers: { Authorization: `Bearer ${await getAccessTokenSilently()}` },
         url: '/notes',
         method: 'delete',
         baseURL: process.env.REACT_APP_BACKEND,
