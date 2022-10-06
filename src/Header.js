@@ -2,12 +2,14 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
 
 function Header(props) {
-
+console.log(props)
   return (
     <>
-      <Navbar bg="dark" variant="dark" style={{"borderBottom":"1px solid grey"}}>
+      <Navbar bg="dark" variant="dark" style={{ "borderBottom": "1px solid grey" }}>
         <Container className="ms-3">
           <Navbar.Brand href="#home">Trello (sorta)</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -15,6 +17,13 @@ function Header(props) {
             <Nav className="me-auto">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#link">About</Nav.Link>
+              <Nav.Link>
+                {props.isAuthenticated ?
+                  <LogoutButton>Logout</LogoutButton>
+                :
+                <LoginButton>Login</LoginButton>
+                }
+              </Nav.Link>
             </Nav>
             {/* <Nav md={{ span: 4, offset: 4 }}>
               <Nav.Link onClick={() => showModal(true)}>New Board</Nav.Link>

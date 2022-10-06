@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 
@@ -13,16 +14,24 @@ import Note from './Note';
 export default function Board(props) {
   const [modalOpen, showModal] = useState(false);
   const [notes, setNotes] = useState([])
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   const getNotes = async (id) => {
-    const URL = `${process.env.REACT_APP_BACKEND}/notes?id=${id}`;
-    const response = await axios.get(URL)
+    const jwt = await getAccessTokenSilently();
+    const config = {
+      headers: { Authorization: `Bearer ${jwt}` },
+      baseURL: process.env.REACT_APP_BACKEND,
+      url: `/notes?id=${id}`
+    }
+    const response = await axios(config)
     setNotes(response.data);
   }
 
   const deleteBoard = async (obj) => {
     if (window.confirm('Delete this board?  This will also delete all the notes associated with it.')) {
+      const jwt = await getAccessTokenSilently();
       const config = {
+        headers: { Authorization: `Bearer ${jwt}` },
         url: '/boards',
         method: 'delete',
         baseURL: process.env.REACT_APP_BACKEND,
